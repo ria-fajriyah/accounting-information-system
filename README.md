@@ -15,7 +15,7 @@ This repo contains the diagrams and SQL layer of that work: process flowcharts, 
 
 | Revenue Cycle | Expenditure Cycle |
 |---|---|
-| ![Revenue Cycle Flowchart](diagrams/flowchart_revenue_cycle.png) | ![Expenditure Cycle Flowchart](diagrams/flowchart_expenditure_cycle.png) |
+| ![Revenue Cycle Flowchart](flowchart_revenue_cycle.png) | ![Expenditure Cycle Flowchart](flowchart_expenditure_cycle.png) |
 
 Each flowchart is organized by swimlane (department/role) — Sales Team, Sales Admin, Warehouse & Shipping, Finance on the revenue side; Warehouse Admin, Procurement, Warehouse, Finance on the expenditure side — showing handoffs and approval checkpoints.
 
@@ -23,13 +23,13 @@ Each flowchart is organized by swimlane (department/role) — Sales Team, Sales 
 
 | Revenue Cycle | Expenditure Cycle |
 |---|---|
-| ![REA Diagram Revenue Cycle](diagrams/rea_diagram_revenue_cycle.png) | ![REA Diagram Expenditure Cycle](diagrams/rea_diagram_expenditure_cycle.png) |
+| ![REA Diagram Revenue Cycle](rea_diagram_revenue_cycle.png) | ![REA Diagram Expenditure Cycle](rea_diagram_expenditure_cycle.png) |
 
 The REA models capture the core Resources (Product, Inventory), Events (Sales Order, Delivery, Sales Invoice, Cash Receipt / Purchase Requisition, Purchase Order, Goods Receipt, Supplier Invoice, Cash Disbursement), and Agents (Customer, Supplier, Employee) for each cycle, with the responsible role noted on each event relationship for internal control traceability.
 
 ## Database Schema
 
-![Table Relationships](diagrams/table_relationships.png)
+![Table Relationships](dtable_relationships.png)
 
 The full schema (built in Microsoft Access) implements the REA models above as related tables — customers, suppliers, employees, regional data, orders, deliveries, invoices, receipts/disbursements, inventory, and their respective detail/line-item tables.
 
@@ -39,24 +39,20 @@ All queries in [`/queries`](./queries) run against the schema above and answer s
 
 | # | Query | Business Question |
 |---|---|---|
-| 01 | [Top 5 Best Seller Product](queries/01_top5_best_seller_product.sql) | Which 5 products sell the most by quantity and revenue? |
-| 02 | [Penjualan per Produk](queries/02_penjualan_per_produk.sql) | Total quantity sold and revenue per product |
-| 03 | [Penjualan per Customer](queries/03_penjualan_per_customer.sql) | Total revenue per customer, ranked |
-| 04 | [Piutang Customer](queries/04_piutang_customer.sql) | Outstanding accounts receivable balance per customer |
-| 05 | [Aging Piutang Customer](queries/05_aging_piutang_customer.sql) | Age of unpaid invoices past due date (receivables aging) |
-| 06 | [Pembelian per Supplier](queries/06_pembelian_per_supplier.sql) | Total purchase value per supplier |
-| 07 | [Evaluasi Supplier](queries/07_evaluasi_supplier.sql) | Supplier evaluation by transaction frequency and purchase value |
-| 08 | [Laporan Persediaan](queries/08_laporan_persediaan.sql) | Inventory report by region and product |
-| 09 | [Persediaan Minimum](queries/09_persediaan_minimum.sql) | Products at or below minimum stock level, by region |
-| 10 | [Selisih Pengiriman](queries/10_selisih_pengiriman.sql) | Discrepancies between quantity ordered and quantity delivered |
+| 01 | [Top 5 Best Seller Product](queries/top5_best_seller_product.sql) | Which 5 products sell the most by quantity and revenue? |
+| 02 | [Penjualan per Produk](queries/penjualan_per_produk.sql) | Total quantity sold and revenue per product |
+| 03 | [Penjualan per Customer](queries/penjualan_per_customer.sql) | Total revenue per customer, ranked |
+| 04 | [Piutang Customer](queries/piutang_customer.sql) | Outstanding accounts receivable balance per customer |
+| 05 | [Aging Piutang Customer](queries/aging_piutang_customer.sql) | Age of unpaid invoices past due date (receivables aging) |
+| 06 | [Pembelian per Supplier](queries/pembelian_per_supplier.sql) | Total purchase value per supplier |
+| 07 | [Evaluasi Supplier](queries/evaluasi_supplier.sql) | Supplier evaluation by transaction frequency and purchase value |
+| 08 | [Laporan Persediaan](queries/laporan_persediaan.sql) | Inventory report by region and product |
+| 09 | [Persediaan Minimum](queries/persediaan_minimum.sql) | Products at or below minimum stock level, by region |
+| 10 | [Selisih Pengiriman](queries/selisih_pengiriman.sql) | Discrepancies between quantity ordered and quantity delivered |
 
 **Techniques used**: multi-table `INNER JOIN` / `LEFT JOIN`, aggregate functions (`SUM`, `COUNT`), `GROUP BY` / `HAVING`, subqueries (`NOT IN`), date arithmetic for aging analysis, and MS Access–specific functions (`Nz`, `Date()`, `TOP N`).
 
 ## Tech Stack
 
 - **Database**: Microsoft Access (SQL, relational schema design)
-- **Diagramming**: Mermaid / Graphviz (flowcharts), REA modeling notation
-
-## Project Context
-
-This was originally built as an Accounting Information Systems (AIS) coursework deliverable, acting as consultants for a fictional distribution client. This repo includes only the diagrams and SQL analysis layer to keep the focus on data modeling and query skills; the full deliverable also included a written internal control report.
+- **Diagramming**: Mermaid (flowcharts), REA modeling notation
